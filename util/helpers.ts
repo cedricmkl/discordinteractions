@@ -90,10 +90,10 @@ type ButtonProps = {
 
 type ButtonPropsCustomId = ButtonProps & {
   style:
-  | ButtonStyle.Primary
-  | ButtonStyle.Secondary
-  | ButtonStyle.Success
-  | ButtonStyle.Danger;
+    | ButtonStyle.Primary
+    | ButtonStyle.Secondary
+    | ButtonStyle.Success
+    | ButtonStyle.Danger;
   custom_id: string;
 };
 
