@@ -29,7 +29,7 @@ type OptionType =
 type HandleFunction = (
     interaction: APIChatInputApplicationCommandInteraction,
     options: Options,
-) => ApplicationCommandInteractionResponse;
+) => Promise<ApplicationCommandInteractionResponse> | ApplicationCommandInteractionResponse;
 
 export function slashParser(): SlashParser {
     return new SlashParser();
@@ -96,7 +96,7 @@ class SlashParser {
         return this;
     }
 
-    handle = (interaction: APIChatInputApplicationCommandInteraction): ApplicationCommandInteractionResponse => {
+    handle = async (interaction: APIChatInputApplicationCommandInteraction): Promise<ApplicationCommandInteractionResponse> => {
         const { options } = interaction.data;
         const transformedOptions = transformOptions(interaction.data);
 
@@ -105,7 +105,7 @@ class SlashParser {
 
         if (!subCommand && !subCommandGroup) {
             const handler = this.handler.findHandler("base", null);
-            if (handler) return handler.handle(interaction, transformedOptions);
+            if (handler) return await handler.handle(interaction, transformedOptions);
         }
 
         return message({ content: "Not implemented" });

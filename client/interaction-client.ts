@@ -72,6 +72,7 @@ function toHandlerInput(
       return ["modal", data.custom_id];
     }
   }
+  throw new Error("Unknown interaction type");
 }
 
 export function interactions(
